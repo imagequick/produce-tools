@@ -2,11 +2,15 @@
 import pika
 import commands
 import socket
+import base64
+
 connection = pika.BlockingConnection(pika.ConnectionParameters(
          host='localhost'))
 channel = connection.channel()
 channel.queue_declare(queue='rpc_queue')
 def on_request(ch, method, props, body):
+    #print body
+    body = base64.b64decode(body)
     print body
     run = commands.getoutput(body)
     response = socket.gethostname()

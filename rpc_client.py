@@ -2,6 +2,7 @@
 import pika
 import uuid
 import sys
+import base64
 
 class FibonacciRpcClient(object):
     def __init__(self):
@@ -36,6 +37,7 @@ class FibonacciRpcClient(object):
 
 fibonacci_rpc = FibonacciRpcClient()
 text = ' '.join(sys.argv[1:])
+#text = base64.b64encode(text)
 
 response = fibonacci_rpc.call(text)
 print response
